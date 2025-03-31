@@ -1,0 +1,21 @@
+# Setting up the secrets
+apiVersion: v1
+kind: Secret
+metadata:
+  name: defjef-data-secrets
+  namespace: defjef-data
+type: Opaque
+stringData:
+  rmq.user: defjef_user
+  rmq.pass: DefJef@DataBus
+---
+apiVersion: rabbitmq.com/v1beta1
+kind: RabbitmqCluster
+metadata:
+    name: defjef-data-bus
+    namespace: defjef-data
+spec:
+  rabbitmq:
+    additionalConfig: |
+      clustering.forceBoot = true
+  replicas: 1
