@@ -12,10 +12,11 @@ stringData:
 apiVersion: rabbitmq.com/v1beta1
 kind: RabbitmqCluster
 metadata:
-    name: defjef-data-bus
+    name: defjef-queue
     namespace: defjef-data
 spec:
-  rabbitmq:
-    additionalConfig: |
-      clustering.forceBoot = true
+  image: rabbitmq:4.0.7-alpine
+  persistence:
+    storageClassName: local
+    storage: 20Gi
   replicas: 1
